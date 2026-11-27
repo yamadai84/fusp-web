@@ -155,7 +155,6 @@ button { font: inherit; cursor: pointer; }
 .ev-name { margin: 4px 18px 0; font-family: var(--en); font-size: 2rem; line-height: 1.05; }
 .ev-more { margin: auto 18px 0; padding: 12px 0 18px; font-weight: 900; color: var(--blue); }
 .ev-notice { margin: 0; background: var(--red); color: #fff; font-size: .8rem; font-weight: 900; padding: 8px 14px; text-align: center; }
-.ev.is-off .ev-logo { filter: grayscale(1); opacity: .6; }
 
 /* ---------- タイムテーブル ---------- */
 .tt-tabs { display: flex; gap: 8px; margin-bottom: 18px; }
