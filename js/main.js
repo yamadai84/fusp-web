@@ -5,6 +5,7 @@
   const slot = (name) => $(`[data-render="${name}"]`);
   const esc = (s = "") => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const br = (s) => esc(s).replace(/\n/g, "<br>");
+  const flat = (s = "", sep = "") => String(s).replace(/\n/g, sep);
   const genre = (id) => D.genres.find((g) => g.id === id);
   const colorOf = (c) => (c && c.startsWith("#") ? c : (genre(c) || {}).color || "#1d64a7");
   const set = (name, html) => { const el = slot(name); if (el) el.innerHTML = html; return el; };
@@ -54,7 +55,7 @@
     set("genres", D.genres.map((g, i) => `
       <button class="genre-btn" style="--c:${g.color}" data-i="${i}">
         <span class="g-ill"><img src="img/genre/${g.illust}" alt="" loading="lazy"></span>
-        <span class="g-txt"><span class="g-en">${esc(g.en)}</span><span class="g-ja">${esc(g.ja)}</span></span>
+        <span class="g-txt"><span class="g-en">${br(g.en)}</span><span class="g-ja">${br(g.ja)}</span></span>
         <span class="arrow" aria-hidden="true"></span>
       </button>`).join(""));
     slot("genres").addEventListener("click", (e) => {
@@ -62,8 +63,8 @@
       const g = D.genres[b.dataset.i];
       modal.style.setProperty("--c", g.color);
       $(".modal-body", modal).innerHTML = `
-        <div class="m-ill${g.photo ? " is-photo" : ""}"><img src="${g.photo ? esc(g.photo) : `img/genre/${g.illust}`}" alt="${esc(g.ja)}"></div>
-        <h3 class="m-en">${esc(g.en)}</h3><p class="m-ja">${esc(g.ja)}</p>
+        <div class="m-ill${g.photo ? " is-photo" : ""}"><img src="${g.photo ? esc(g.photo) : `img/genre/${g.illust}`}" alt="${esc(flat(g.ja))}"></div>
+        <h3 class="m-en">${esc(flat(g.en, " "))}</h3><p class="m-ja">${esc(flat(g.ja))}</p>
         <h4>どんな種目？</h4><p class="m-text">${esc(g.text)}</p>
         <a class="btn" href="trial.html">体験してみる！<span class="arrow sm"></span></a>`;
       modal.showModal();
@@ -169,7 +170,7 @@
     <div class="ts-day"><h3>${esc(d.day)}</h3><ul>
       ${d.items.map((it) => { const g = genre(it.genre) || {};
         return `<li style="--c:${g.color}"><span class="ts-ill"><img src="img/genre/${g.illust}" alt="" loading="lazy"></span>
-          <span class="ts-time">${esc(it.time)}</span><span class="ts-name">${esc(it.label || g.ja)}</span></li>`; }).join("")}
+          <span class="ts-time">${esc(it.time)}</span><span class="ts-name">${esc(it.label || flat(g.ja))}</span></li>`; }).join("")}
     </ul></div>`).join("") + (TR.pilatesScheduleUrl ? `<p class="center"><a class="link" href="${esc(TR.pilatesScheduleUrl)}" target="_blank" rel="noopener">ピラティスの実施スケジュールはこちら ▶</a></p>` : ""));
   set("trial-notes", TR.notes.map((n) => `<div class="tn"><h3>${esc(n.head)}</h3><p>${br(n.body)}</p>
     ${n.link ? `<a class="link" href="${esc(n.link.url)}"${n.link.url.startsWith("http") ? ' target="_blank" rel="noopener"' : ""}>${esc(n.link.text)} ▶</a>` : ""}</div>`).join(""));
