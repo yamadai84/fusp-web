@@ -243,7 +243,7 @@ FUKUOKA URBAN SPORTS PARK 2026
         { time: "15:30〜16:20", genre: "bmx" },
         { time: "16:30〜17:20", genre: "fsf" },
         { time: "17:30〜18:20", genre: "pickle" },
-        { time: "終日", genre: "pilates", label: "ピラティス（スケジュールは下記）" },
+        { time: "終日", genre: "pilates", label: "ピラティス（時間は下記）" },
       ]},
       { day: "Day 2 - 10/25 (日)", items: [
         { time: "10:30〜11:50", genre: "pickle" },
@@ -252,7 +252,7 @@ FUKUOKA URBAN SPORTS PARK 2026
         { time: "14:50〜15:30", genre: "pickle" },
         { time: "15:40〜16:30", genre: "dd" },
         { time: "16:40〜17:30", genre: "fsf" },
-        { time: "終日", genre: "pilates", label: "ピラティス（スケジュールは下記）" },
+        { time: "終日", genre: "pilates", label: "ピラティス（時間は下記）" },
       ]},
     ],
     pilatesScheduleUrl: "https://www.instagram.com/p/DdoYp-Zk6Ej/",
